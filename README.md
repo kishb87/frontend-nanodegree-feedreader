@@ -1,4 +1,4 @@
-This was my final assignment for the Udacity nanodegree program. The instructions for the assignment are below.
+This was my final assignment for the Udacity nanodegree program. To run application, open index.html. Further description of this project is below. 
 
 # Project Overview
 

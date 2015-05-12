@@ -45,14 +45,14 @@ $(function() {
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
-         it('Name defined', function(){
+        it('Name defined', function(){
             for(var i = 0; i < allFeeds.length; i++){
                 expect(allFeeds[i].name).toBeDefined();
                 expect(allFeeds[i].name).not.toBe(' ');
                 expect(allFeeds[i].name).not.toBe('');
             }
 
-         });
+        });
     });
 
     /* TODO: Write a new test suite named "The menu" */
@@ -62,7 +62,7 @@ $(function() {
          * the CSS to determine how we're performing the
          * hiding/showing of the menu element.
          */
-         it('menu hidden by default', function() {
+        it('menu hidden by default', function() {
           expect($('body').hasClass('menu-hidden')).toBe(true);
         });
          
@@ -80,12 +80,9 @@ $(function() {
           expect($('body').hasClass('menu-hidden')).toBe(true);
         });
     }); 
-
-       
-
-    
-
     /* TODO: Write a new test suite named "Initial Entries" */
+
+    describe('Initial Entries', function(){
 
         /* TODO: Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
@@ -94,10 +91,45 @@ $(function() {
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
 
+        beforeEach(function(done){
+            loadFeed(0, done);
+
+        });
+
+        it('feed contains atleast a single entry', function(done){
+            expect($('.feed').find('.entry').length).toBeGreaterThan(0);
+            done();
+        });
+
+    
+
+    
+
     /* TODO: Write a new test suite named "New Feed Selection"
 
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+         var change;
+         
+         beforeEach(function(done){
+            change = false;
+
+            $('.feed').on('DOMSubtreeModified', function() {
+                change = true;
+            });
+
+            loadFeed(1, done);
+
+         });
+
+         it('feed content changes when new feed loaded', function(done){
+            expect(change).toBeTruthy();
+            done();
+         });
+
+    });
+
+
 }());
